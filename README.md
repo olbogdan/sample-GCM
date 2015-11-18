@@ -10,9 +10,9 @@ App has two logical modules:
 
 preparing:
 <ul>
-<li>Created project in Google Developers console</li>
-<li>Generated Project number - used for registration in Google Api system as client.</li>
-<li>Create server API key - used by server side</li>
+<li>Created project in Google Developers Console</li>
+<li>Generated Project number - used for registration in Google Api system as client in Dev Console</li>
+<li>Create server API key - used by server side in Dev Console</li>
 </ul>
 
 <p><b>Client part</b></p>
@@ -24,9 +24,6 @@ preparing:
 </ol>
 
 <p><b>Server-like part</b></p>
-
-For emulation push (like message created from server) 
-application uses server API key - generated  in Dev Console
 
 Send POST to Google Cloud API with:
 <ul>
