@@ -13,22 +13,22 @@ Applicaiton in role "server"
 For emulation push (like message created from server) 
 application uses server API key - generated  in Dev Console
 application send POST to Google cloud with:
-<ol>
+<ul>
 <li>API key</li>
 <li>message</li>
 <li>token (this token directly taken from the app after registration to Coud, but in real server-client application the token should be sent to server after client registration to GCM</li>
-</ol>
+</ul>
 
 Google cloud creates Push Message and send it to client
 
 UI:
 
-<ol>
+<ul>
 <li>Log</li>
 <li>Show messages sent to server</li>
 <li>Show cont of successfuly sent messages</li>
 <li>Show messages received from server</li>
-</ol>
+</ul>
 
 Message to server could be created in application: add text to send in special field and press  send.
 
