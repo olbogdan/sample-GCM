@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">PushNotifications</string>
+    <string name="toast_crash_text">\"Ooooops! I crashed, but a report has been sent to my developer to help fix the issue!</string>
+    <string name="send_push">send push</string>
+    <string name="push_registered">Push notificatins registered</string>
+    <string name="message_received">"Push message received from cloud server: "</string>
+    <string name="success_registration">Success registered for server push</string>
+    <string name="failure_registration">Fail to registered for server push</string>
+    <string name="default_message">default message</string>
+</resources>
