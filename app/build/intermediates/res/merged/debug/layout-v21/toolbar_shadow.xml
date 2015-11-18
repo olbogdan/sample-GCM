@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2015. Strikersoft LLC
+  -->
+
+<android.support.v7.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app1="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    android:layout_width="fill_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="?attr/colorPrimary"
+    android:elevation="4dp"
+    android:minHeight="?attr/actionBarSize"
+    app1:popupTheme="@style/AppTheme">
+</android.support.v7.widget.Toolbar><!-- From: file:/home/abogdanov/AndroidStudioProjects/CloudMessaging/app/src/main/res/layout-v21/toolbar_shadow.xml -->
