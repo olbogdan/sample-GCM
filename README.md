@@ -1,6 +1,8 @@
 client server application
 this application could be used for debug Google Cloud Messages.
 
+![](https://raw.githubusercontent.com/Flinbor/sample-GCM/gh-pages/device-2015-11-18-153941.png)
+
 Client side of application
 
 Created project in Google Developers console
