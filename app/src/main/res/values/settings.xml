@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="project_number">1080741198043</string>
+    <string name="api_key">AIzaSyA31QMiY4skgCs0ZzjzlFH6fQlIYcgv24U</string>
+    <string name="server_url">https://gcm-http.googleapis.com/gcm</string>
+
+</resources>
