@@ -3,19 +3,17 @@ package com.github.flinbor.pushclint.api;
 
 import android.content.Context;
 
-import com.github.flinbor.pushclint.core.PushCore;
+import com.github.flinbor.pushclint.core.PushApplication;
 import com.github.flinbor.pushclint.model.RequestPushBody;
 import com.github.flinbor.pushclint.model.ResponcePostPush;
 import com.github.flinbor.pushclint.util.Logger;
 import com.squareup.okhttp.OkHttpClient;
-
 
 import java.util.concurrent.TimeUnit;
 
 import retrofit.RestAdapter;
 import retrofit.client.Client;
 import retrofit.client.OkClient;
-
 import retrofit.http.Body;
 import retrofit.http.Header;
 import retrofit.http.POST;
@@ -43,7 +41,7 @@ public class PushCareApiClient {
                 if (restApi == null) {
 
                     RestAdapter.Builder restAdapterBuilder = new RestAdapter.Builder()
-                            .setEndpoint(PushCore.getInstance().getContext().getString(R.string.server_url))
+                            .setEndpoint(PushApplication.getInstance().getString(R.string.server_url))
                             .setLogLevel(
                                     Logger.ENABLED ? RestAdapter.LogLevel.FULL : RestAdapter.LogLevel.NONE)
                             .setClient(getRetrofitClient(context));

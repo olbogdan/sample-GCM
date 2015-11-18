@@ -15,47 +15,44 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.github.flinbor.pushclint.core.PushApplication;
+import com.github.flinbor.pushclint.eventbus.HubEvent;
 import com.github.flinbor.pushclint.eventbus.PostPushEvent;
+import com.github.flinbor.pushclint.eventbus.RegistrationEvent;
+import com.github.flinbor.pushclint.eventbus.RegistrationEvent.State;
 import com.github.flinbor.pushclint.job.PostPushJob;
+import com.github.flinbor.pushclint.job.RegistrationJob;
 import com.path.android.jobqueue.JobManager;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import de.greenrobot.event.EventBus;
-import com.github.flinbor.pushclint.eventbus.HubEvent;
 import tk.flinbor.pushnotifications.R;
-import com.github.flinbor.pushclint.core.PushCore;
-import com.github.flinbor.pushclint.eventbus.RegistrationEvent;
-import com.github.flinbor.pushclint.eventbus.RegistrationEvent.State;
-import com.github.flinbor.pushclint.job.RegistrationJob;
 
 public class MainActivity extends BaseActivity {
-    @Bind(R.id.progress) View progress;
-    @Bind(R.id.imageview_push_status) ImageView imageViewPushStatus;
-    @Bind(R.id.textview_log) TextView textViewLog;
-    @Bind(R.id.edittext_push) EditText editTextPush;
-    @Bind(R.id.scroll) ScrollView scroll;
+    @Bind(R.id.progress)
+    View progress;
+    @Bind(R.id.imageview_push_status)
+    ImageView imageViewPushStatus;
+    @Bind(R.id.textview_log)
+    TextView textViewLog;
+    @Bind(R.id.edittext_push)
+    EditText editTextPush;
+    @Bind(R.id.scroll)
+    ScrollView scroll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        EventBus.getDefault().register(this);
         ButterKnife.bind(this);
         initActionBar(getWindow());
 
         if (checkPlayServices()) {
             // Start Job to register this application with GCM.
-            JobManager jobManager = PushCore.getInstance().getJobManager();
+            JobManager jobManager = PushApplication.getInstance().getJobManager();
             jobManager.addJobInBackground(new RegistrationJob());
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
     }
 
     @SuppressWarnings({"UnusedDeclaration", "deprecation"})
@@ -97,17 +94,9 @@ public class MainActivity extends BaseActivity {
         progress.setVisibility(View.GONE);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        try {
-            EventBus.getDefault().unregister(this);
-        } catch (Throwable t) {/*this may crash if registration did not go through. just be safe*/}
-    }
-
     @OnClick(R.id.button_send_push)
     public void onClick() {
-        JobManager jobManager = PushCore.getInstance().getJobManager();
+        JobManager jobManager = PushApplication.getInstance().getJobManager();
         String message = editTextPush.getText().toString();
         if (TextUtils.isEmpty(message)) {
             message = getString(R.string.default_message);

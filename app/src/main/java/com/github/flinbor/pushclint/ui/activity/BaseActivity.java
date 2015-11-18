@@ -12,11 +12,12 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.github.flinbor.pushclint.util.UIHelper;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
+import de.greenrobot.event.EventBus;
 import tk.flinbor.pushnotifications.R;
-import com.github.flinbor.pushclint.util.UIHelper;
 
 abstract public class BaseActivity extends AppCompatActivity {
     private Toolbar toolbar;
@@ -35,6 +36,7 @@ abstract public class BaseActivity extends AppCompatActivity {
             window.getAttributes().flags &= (~WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.setStatusBarColor(getResources().getColor(R.color.primary_green_dark));
         }
+        EventBus.getDefault().register(this);
     }
 
     /**
@@ -90,5 +92,14 @@ abstract public class BaseActivity extends AppCompatActivity {
         }
         return true;
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        try {
+            EventBus.getDefault().unregister(this);
+        } catch (Throwable t) {/*this may crash if registration did not go through. just be safe*/}
+    }
+
 
 }

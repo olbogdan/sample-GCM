@@ -35,7 +35,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="20dp"
                 android:padding="5dp"
-                android:hint="this text will be send to push server"
+                android:hint="@string/hint_type_push_message_text"
                 android:background="@android:color/white"
                 android:lines="2"/>
 
@@ -85,6 +85,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:maxLines="1"
                     android:text="@string/push_registered"/>
             </LinearLayout>
@@ -93,10 +94,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textStyle="italic"
                 android:gravity="center"
-                android:text="Log"/>
+                android:text="@string/log"/>
             <ScrollView
                 android:id="@+id/scroll"
                 android:layout_width="match_parent"
@@ -106,7 +107,7 @@
                 <TextView
                     android:id="@+id/textview_log"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:background="@android:color/white"
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp"

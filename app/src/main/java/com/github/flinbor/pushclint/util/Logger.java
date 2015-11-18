@@ -14,6 +14,10 @@ import tk.flinbor.pushnotifications.BuildConfig;
  */
 public class Logger {
     public static final boolean ENABLED = BuildConfig.DEBUG;
+    public static final String TAG = PushApplication.class.getName();
+
+    private Logger() {
+    }
 
     /**
      * @param tag
@@ -50,7 +54,7 @@ public class Logger {
      */
     public static void logD(String message) {
         if (ENABLED) {
-            Log.d(PushApplication.class.getName(), message);
+            Log.d(TAG, message);
         }
     }
 
@@ -59,7 +63,7 @@ public class Logger {
      */
     public static void logE(String message) {
         if (ENABLED) {
-            Log.e(PushApplication.class.getName(), message);
+            Log.e(TAG, message);
         }
     }
 
@@ -68,7 +72,7 @@ public class Logger {
      */
     public static void logI(String message) {
         if (ENABLED) {
-            Log.e(PushApplication.class.getName(), message);
+            Log.e(TAG, message);
         }
     }
 }

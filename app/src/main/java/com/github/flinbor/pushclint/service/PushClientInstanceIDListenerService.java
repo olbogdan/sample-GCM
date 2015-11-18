@@ -3,9 +3,7 @@ package com.github.flinbor.pushclint.service;
 /**
  * Created by Bogdanov Oleksandr on 18,October,2015
  */
-
-
-import com.github.flinbor.pushclint.core.PushCore;
+import com.github.flinbor.pushclint.core.PushApplication;
 import com.google.android.gms.iid.InstanceIDListenerService;
 import com.path.android.jobqueue.JobManager;
 
@@ -25,7 +23,7 @@ public class PushClientInstanceIDListenerService extends InstanceIDListenerServi
     @Override
     public void onTokenRefresh() {
         PushHelper.clearRegistrationId(this);
-        JobManager jobManager = PushCore.getInstance().getJobManager();
+        JobManager jobManager = PushApplication.getInstance().getJobManager();
         jobManager.addJobInBackground(new RegistrationJob());
     }
 

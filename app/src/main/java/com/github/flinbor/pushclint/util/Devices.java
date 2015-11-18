@@ -10,33 +10,95 @@ import java.util.Locale;
 
 /**
  * Helper class to get the consumer friendly device name.</p>
- * <p/>
- * {@code String device = Devices.getDeviceName();}</p>
- * <p/>
- * The above code will get the device name as specified in the supported device list that is
- * maintained by Google.</p>
- * <p/>
- * See: https://support.google.com/googleplay/answer/1727131</p>
- *
- * @author Jared Rummler <jared.rummler@gmail.com>
  */
 public class Devices {
+    private static String sDeviceName;
 
-    // @formatter:off
+    private Devices() {
+    }
+
+    /**
+     * Returns the consumer friendly device name
+     */
+    public static String getDeviceName() {
+        if (sDeviceName != null) {
+            return sDeviceName;
+        }
+        final String key = Build.DEVICE + "|" + Build.MODEL;
+        for (final String str : SUPPORTED_DEVICES) {
+            if (str.endsWith(key)) {
+                final String[] names = str.split("\\|");
+                final String retailBranding = names[0];
+                final String marketingName = names[1];
+                if (marketingName.startsWith(retailBranding)) {
+                    sDeviceName = marketingName;
+                } else {
+                    sDeviceName = retailBranding + " " + marketingName;
+                }
+                return sDeviceName;
+            }
+        }
+        final String manufacturer = Build.MANUFACTURER;
+        final String model = Build.MODEL;
+        if (model.startsWith(manufacturer)) {
+            sDeviceName = capitalize(model);
+        } else if (manufacturer.equalsIgnoreCase("HTC")) {
+            sDeviceName = "HTC " + model; // make sure HTC is capitalized
+        } else {
+            sDeviceName = capitalize(manufacturer) + " " + model;
+        }
+        return sDeviceName;
+    }
+
+    /**
+     * Returns the consumer friendly device name based on the value of {@link Build#DEVICE}
+     */
+    public static String getDeviceName(final String device) {
+        final String key = "|" + device + "|";
+        for (final String str : SUPPORTED_DEVICES) {
+            if (str.contains(key)) {
+                final String[] names = str.split("\\|");
+                final String retailBranding = names[0];
+                final String marketingName = names[1];
+                if (marketingName.startsWith(retailBranding)
+                        || marketingName.toLowerCase(Locale.ENGLISH).startsWith("moto ")) {
+                    return marketingName;
+                }
+                return retailBranding + " " + marketingName;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Capitalizes all the whitespace separated words in a String. Only the first letter of each
+     * word is changed. To convert the rest of each word to lowercase at the same time, use
+     *
+     * @param str the String to capitalize
+     * @return capitalized The capitalized String
+     */
+    private static String capitalize(final String str) {
+        if (TextUtils.isEmpty(str)) {
+            return str;
+        }
+        final char[] arr = str.toCharArray();
+        boolean capitalizeNext = true;
+        String phrase = "";
+        for (final char c : arr) {
+            if (capitalizeNext && Character.isLetter(c)) {
+                phrase += Character.toUpperCase(c);
+                capitalizeNext = false;
+                continue;
+            } else if (Character.isWhitespace(c)) {
+                capitalizeNext = true;
+            }
+            phrase += c;
+        }
+        return phrase;
+    }
 
     /**
      * This array is using the list of supported devices on Google Play.</p>
-     * <p/>
-     * Any device that does not have both the retail name and marketing name is not included.</p>
-     * <p/>
-     * See the following URL for the PDF that this list was derived from:
-     * https://support.google.com/googleplay/answer/1727131</p>
-     * <p/>
-     * Each String uses a vertical line to separate the manufacturer, name, device, and model:</p>
-     * <p/>
-     * "Retail Branding|Marketing Name|Device|Model"</p>
-     * <p/>
-     * Last updated: 2/5/2015</p>
      */
     private static final String[] SUPPORTED_DEVICES = {
             "7Eleven|IN265|IN265|IN265", "A.O.I. ELECTRONICS FACTORY|A.O.I.|TR10CS1_11|TR10CS1",
@@ -3559,99 +3621,4 @@ public class Devices {
             "pendo|PNDPP44QC7|PNDPP44QC7|PNDPP44QC7", "sugar_aums|QPOINT|QPI-1|QPI-1",
             "tecmobile|OmnisOne|OmnisOne|Omnis One", "ucall|EASY1|EASY1|EASY1"
     };
-
-    // @formatter:on
-
-    private static String sDeviceName;
-
-    /**
-     * Returns the consumer friendly device name
-     */
-    public static String getDeviceName() {
-        if (sDeviceName != null) {
-            return sDeviceName;
-        }
-        final String key = Build.DEVICE + "|" + Build.MODEL;
-        for (final String str : SUPPORTED_DEVICES) {
-            if (str.endsWith(key)) {
-                final String[] names = str.split("\\|");
-                final String retailBranding = names[0];
-                final String marketingName = names[1];
-                if (marketingName.startsWith(retailBranding)) {
-                    sDeviceName = marketingName;
-                } else {
-                    sDeviceName = retailBranding + " " + marketingName;
-                }
-                return sDeviceName;
-            }
-        }
-        final String manufacturer = Build.MANUFACTURER;
-        final String model = Build.MODEL;
-        if (model.startsWith(manufacturer)) {
-            sDeviceName = capitalize(model);
-        } else if (manufacturer.equalsIgnoreCase("HTC")) {
-            sDeviceName = "HTC " + model; // make sure HTC is capitalized
-        } else {
-            sDeviceName = capitalize(manufacturer) + " " + model;
-        }
-        return sDeviceName;
-    }
-
-    /**
-     * Returns the consumer friendly device name based on the value of {@link Build#DEVICE}
-     */
-    public static String getDeviceName(final String device) {
-        final String key = "|" + device + "|";
-        for (final String str : SUPPORTED_DEVICES) {
-            if (str.contains(key)) {
-                final String[] names = str.split("\\|");
-                final String retailBranding = names[0];
-                final String marketingName = names[1];
-                if (marketingName.startsWith(retailBranding)
-                        || marketingName.toLowerCase(Locale.ENGLISH).startsWith("moto ")) {
-                    return marketingName;
-                }
-                return retailBranding + " " + marketingName;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * <p>
-     * Capitalizes all the whitespace separated words in a String. Only the first letter of each
-     * word is changed. To convert the rest of each word to lowercase at the same time, use
-     * {@link #capitalizeFully(String)}.
-     * </p>
-     * <p/>
-     * <p>
-     * Whitespace is defined by {@link Character#isWhitespace(char)}.
-     * </p>
-     *
-     * @param str the String to capitalize
-     * @return capitalized The capitalized String
-     */
-    private static String capitalize(final String str) {
-        if (TextUtils.isEmpty(str)) {
-            return str;
-        }
-        final char[] arr = str.toCharArray();
-        boolean capitalizeNext = true;
-        String phrase = "";
-        for (final char c : arr) {
-            if (capitalizeNext && Character.isLetter(c)) {
-                phrase += Character.toUpperCase(c);
-                capitalizeNext = false;
-                continue;
-            } else if (Character.isWhitespace(c)) {
-                capitalizeNext = true;
-            }
-            phrase += c;
-        }
-        return phrase;
-    }
-
-    private Devices() {
-
-    }
 }

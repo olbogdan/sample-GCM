@@ -7,4 +7,6 @@
     <string name="success_registration">Success registered for server push</string>
     <string name="failure_registration">Fail to registered for server push</string>
     <string name="default_message">default message</string>
+    <string name="hint_type_push_message_text">this text will be send to push server</string>
+    <string name="log">Log</string>
 </resources>
