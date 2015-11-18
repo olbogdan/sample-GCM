@@ -1,6 +1,6 @@
-this application could be used for debug Google Cloud Messages.
+this application could be used for debug Google Cloud Messages
 
-<img src="https://raw.githubusercontent.com/Flinbor/sample-GCM/gh-pages/device-2015-11-18-153941.png" alt="home screen" width="200" height="400" align="middle">
+<img src="https://raw.githubusercontent.com/Flinbor/sample-GCM/gh-pages/device-2015-11-18-153941.png" alt="home screen" width="200" height="400">
 
 Client side of application
 
@@ -10,22 +10,25 @@ Client communicate with Google Coud Api for retreive Token.
 Client listens notifications from server in Service Broadcast Receiver
 
 Applicaiton in role "server"
-For emulation push from  server application
-generate server API key in Dev  Console
+For emulation push (like message created from server) 
+application uses server API key - generated  in Dev Console
 application send POST to Google cloud with:
-- API key
-- message
-- token (this token taken directly from app after registration to Coud, but in real server-client token should be sent to server after client registration to Cloud.
+<ol>
+<li>API key</li>
+<li>message</li>
+<li>token (this token directly taken from the app after registration to Coud, but in real server-client application the token should be sent to server after client registration to GCM</li>
+</ol>
 
 Google cloud creates Push Message and send it to client
 
 UI:
 
--Log
--Show messages sent to server;
--Show cont of successfuly sent messages;
--Show messages received from server;
-
+<ol>
+<li>Log</li>
+<li>Show messages sent to server</li>
+<li>Show cont of successfuly sent messages</li>
+<li>Show messages received from server</li>
+</ol>
 
 Message to server could be created in application: add text to send in special field and press  send.
 
