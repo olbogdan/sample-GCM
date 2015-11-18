@@ -2,10 +2,27 @@ this application could be used for debug Google Cloud Messages
 
 <img src="https://raw.githubusercontent.com/Flinbor/sample-GCM/gh-pages/device-2015-11-18-153941.png" alt="home screen" width="200" height="400">
 
-Client side of application
+App has two logical modules:
+<ol>
+<li>client part</li>
+<li>server-like part</li>
+</ol>
 
-Created project in Google Developers console
-Generated Project number - used for registration in Google Api system as client.
+preparing:
+<ul>
+<li>Created project in Google Developers console</li>
+<li>Generated Project number - used for registration in Google Api system as client.</li>
+<li>Create server API key - used by server side</li>
+</ul>
+
+<p><b>Client part</b></p>
+<ol>
+<li>Client creates request to GCA Api for get Token</li>
+<li>Stored it for use in "server-like-part" of application
+<p><i>[in real project should send this token to out Backhand]</p></i></li>
+<li>start listen broadcast GCM</li>
+</ol>
+
 Client communicate with Google Coud Api for retreive Token.
 Client listens notifications from server in Service Broadcast Receiver
 
