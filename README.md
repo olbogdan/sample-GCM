@@ -1,4 +1,3 @@
-client server application
 this application could be used for debug Google Cloud Messages.
 
 <img src="https://raw.githubusercontent.com/Flinbor/sample-GCM/gh-pages/device-2015-11-18-153941.png" alt="home screen" width="200" height="400" align="middle">
